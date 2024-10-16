@@ -1,5 +1,5 @@
 function downloadData() {
-  event.prreventDefault();
+  event.preventDefault();
   var startdate = document.getElementById("startdate").value;
   var enddate = document.getElementById("enddate").value;
   console.log(startdate);
