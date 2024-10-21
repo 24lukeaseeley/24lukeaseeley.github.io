@@ -1,10 +1,26 @@
 function filterData() {
   event.preventDefault();
-  var startdate = document.getElementById("startdate").value;
-  var enddate = document.getElementById("enddate").value;
-  console.log(startdate);
-  console.log(enddate);
+  
+  var startdate = new Date(document.getElementById("startdate").value);
+  var enddate = new Date(document.getElementById("enddate").value);
+  
+  // Get all rows in the table body
+  var tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+  var rows = tableBody.getElementsByTagName('tr');
+  
+  // Loop through rows and hide those outside the date range
+  for (var i = 0; i < rows.length; i++) {
+      var dateCell = rows[i].cells[1].textContent; // Adjust index if Date column position changes
+      var rowDate = new Date(dateCell);
+      
+      if (rowDate >= startdate && rowDate <= enddate) {
+          rows[i].style.display = ''; // Show the row
+      } else {
+          rows[i].style.display = 'none'; // Hide the row
+      }
+  }
 }
+
 
 async function fetchData() {
   try {
